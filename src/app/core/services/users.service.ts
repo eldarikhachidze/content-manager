@@ -8,21 +8,21 @@ import {Observable} from "rxjs";
 })
 export class UsersService extends BaseService{
 
-  // getUsers(params: {
-  //   data: User[];
-  //   order: string;
-  //   page: number
-  //   limit: number;
-  //   search: string;
-  // }): Observable<User[]> {
-  //   return this.get<User[]>('users/all', params)
-  // }
+
+
+  getUser(id: string):Observable<User> {
+    return this.put<User>(`users/update/${id}`);
+  }
   getUsers(params: any): Observable<UserResponse> {
     return this.get<UserResponse>('users/all', { params });
   }
 
   deleteItem(id: string): Observable<User> {
     return this.delete<User>(`users/delete/${id}`);
+  }
+
+  update(id: string, user: User): Observable<User> {
+    return this.put<User>(`users/update/${id}`, user);
   }
 
 }
