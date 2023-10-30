@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
+.content {
+  width: 80%;
+  margin: 0 auto;
+  height: 50px;
+
+}
+.login-input {
+  width: 345px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+  outline: none;
+
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+}
