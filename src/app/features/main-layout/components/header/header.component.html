@@ -1,0 +1,42 @@
+<div>
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+    </div>
+
+    <li>
+      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-link text-white">
+        <h3>
+          Home
+        </h3>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/users" routerLinkActive="active-link" class="nav-link text-white">
+        <h3>
+          Users
+        </h3>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/blogs" routerLinkActive="active-link" class="nav-link text-white">
+        <h3>
+          Blogs
+        </h3>
+      </a>
+    </li>
+
+    <div class="col-md-3 text-end">
+      <ng-container *ngIf="userIsAuthenticated; else notAuthenticated">
+        <button (click)="signOut()" type="button" class="btn btn-outline-primary me-2">Sign Out</button>
+      </ng-container>
+      <ng-template #notAuthenticated>
+        <div class="btn_menu">
+          <button routerLink="/auth/login" type="button" class="btn btn-outline-primary me-2">Login</button>
+        </div>
+      </ng-template>
+    </div>
+  </header>
+</div>
