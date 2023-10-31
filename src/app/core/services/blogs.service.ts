@@ -9,8 +9,8 @@ import {Blog, PaginatedResponse} from "../interfaces/blogs";
 export class BlogsService extends BaseService{
 
 
-  create(blog: Blog): Observable<Blog> {
-    return this.post<Blog>('blog/create-blog', blog);
+  create(formData: FormData): Observable<Blog> {
+    return this.post<Blog>('blog/create-blog', formData);
   }
 
   getAllBlogs(): Observable<PaginatedResponse<Blog>> {
