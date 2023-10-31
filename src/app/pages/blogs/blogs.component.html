@@ -1,0 +1,25 @@
+<div class="p-2 d-flex justify-content-end">
+    <button routerLink="/blogs/create" class="btn btn-primary">Add</button>
+</div>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Choice Photo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of blogs">
+            <th>{{item.title}}</th>
+            <th>{{item.description}}</th>
+            <th>{{item.image}}</th>
+            <th>
+                <button class="btn btn-secondary me-2">Edit</button>
+                <button class="btn btn-danger">Remove</button>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>

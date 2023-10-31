@@ -2,13 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BlogsRoutingModule } from './blogs-routing.module';
+import { BlogsAddOrEditComponent } from './blogs-add-or-edit/blogs-add-or-edit.component';
+import {BlogsComponent} from "./blogs.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    BlogsRoutingModule
-  ]
+  declarations: [
+    BlogsComponent,
+    BlogsAddOrEditComponent
+  ],
+    imports: [
+        CommonModule,
+        BlogsRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class BlogsModule { }
