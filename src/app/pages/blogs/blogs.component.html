@@ -8,13 +8,19 @@
             <th>Title</th>
             <th>Description</th>
             <th>Choice Photo</th>
+            <th>Deleted at</th>
+            <th>Updated at</th>
+            <th>Created at</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let item of blogs">
             <th>{{item.title}}</th>
             <th>{{item.description}}</th>
-            <th>{{item.image}}</th>
+            <th>{{item.files}}</th>
+            <th>{{item.deletedAt}}</th>
+            <th>{{item.updatedAt}}</th>
+            <th>{{item.createdAt}}</th>
             <th>
                 <button class="btn btn-secondary me-2">Edit</button>
                 <button class="btn btn-danger">Remove</button>

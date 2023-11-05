@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BlogsService} from "../../core/services/blogs.service";
 import {Blog} from "../../core/interfaces/blogs";
 import {Subject, takeUntil} from "rxjs";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-blogs',
@@ -16,6 +15,11 @@ export class BlogsComponent implements OnInit, OnDestroy {
   total?: number;
   limit?: number;
   page?: number;
+
+  id?: number
+  title?: string
+  description?: string
+  files?: string[]
 
   sub$ = new Subject()
   constructor(
@@ -32,12 +36,8 @@ export class BlogsComponent implements OnInit, OnDestroy {
     this.blogsService.getAllBlogs()
       .pipe(takeUntil(this.sub$))
       .subscribe((response) => {
-        this.data = response.data;
-        this.total = response.total;
-        this.limit = response.limit;
-        this.page = response.page;
-        console.log(response)
-
+        this.blogs = response.data
+        console.log(response.data)
       })
   }
 

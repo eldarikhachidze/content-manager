@@ -13,7 +13,7 @@ export class BlogsAddOrEditComponent {
     id: new FormControl(null),
     title: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    image: new FormControl('', Validators.required),
+    files: new FormControl('', Validators.required),
   })
 
   constructor(
@@ -29,18 +29,18 @@ export class BlogsAddOrEditComponent {
       return
     }
 
-    console.log(this.form.value)
-    const formData: FormData = new FormData();
-
-    formData.append('id', this.form.get('id')?.value);
-    formData.append('title', this.form.get('title')?.value);
-    formData.append('description', this.form.get('description')?.value);
-    formData.append('image', this.form.get('image')?.value);
-
-    this.blogsService.create(formData).subscribe(res => {
-      this.router.navigate(['/blogs']).then(() => {
-        this.form.reset();
-      });
-    });
+    // console.log(this.form.value)
+    // const formData: FormData = new FormData();
+    //
+    // formData.append('id', this.form.get('id')?.value);
+    // formData.append('title', this.form.get('title')?.value);
+    // formData.append('description', this.form.get('description')?.value);
+    // formData.append('image', this.form.get('image')?.value);
+    //
+    // this.blogsService.create(formData).subscribe(res => {
+    //   this.router.navigate(['/blogs']).then(() => {
+    //     this.form.reset();
+    //   });
+    // });
   }
 }

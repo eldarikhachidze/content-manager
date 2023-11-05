@@ -20,7 +20,7 @@ export class AuthService extends BaseService{
   login(payload: Login): Observable<LoginResponse> {
     return this.post<LoginResponse>('auth/sign-in', payload)
       .pipe(
-        tap((response:LoginResponse) => {
+        tap((response: LoginResponse) => {
           this.setToken(response.token.accessToken)
           this.setUser(response.user)
         })

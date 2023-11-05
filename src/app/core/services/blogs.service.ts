@@ -9,12 +9,24 @@ import {Blog, PaginatedResponse} from "../interfaces/blogs";
 export class BlogsService extends BaseService{
 
 
-  create(formData: FormData): Observable<Blog> {
-    return this.post<Blog>('blog/create-blog', formData);
-  }
+  // create(formData: FormData): Observable<Blog> {
+  //   return this.post<Blog>('blog/create-blog', formData);
+  // }
+  create(title: string, description: string, file: File) {
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('files', file);
 
-  getAllBlogs(): Observable<PaginatedResponse<Blog>> {
-    return this.get<PaginatedResponse<Blog>>('blog/get-all-blogs');
+  return this.post<any>('blog/create-blog', formData);
+}
+
+  // create(blog: Blog): Observable<Blog> {
+  //   return this.post<Blog>('blog/create-blog', blog);
+  // }
+
+  getAllBlogs(): Observable<PaginatedResponse<Blog[]>> {
+    return this.get<PaginatedResponse<Blog[]>>('blog/get-all-blogs');
   }
 
 }

@@ -1,13 +1,16 @@
 
 export interface PaginatedResponse<T> {
-  data: T[];
+  data: Blog[];
   total: number;
   limit: number;
   page: number;
 }
 export interface Blog {
-  id?: number;
-  image: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: any;
+  id: number;
   title: string;
-  description: string
+  description: string;
+  files: string[];
 }
