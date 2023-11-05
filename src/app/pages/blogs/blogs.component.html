@@ -22,7 +22,7 @@
             <th>{{item.updatedAt}}</th>
             <th>{{item.createdAt}}</th>
             <th>
-                <button class="btn btn-secondary me-2">Edit</button>
+                <button class="btn btn-secondary me-2" [routerLink]="['/blogs/edit', item.id]">Edit</button>
                 <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>
             </th>
         </tr>
