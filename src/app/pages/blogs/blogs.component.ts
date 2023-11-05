@@ -11,16 +11,6 @@ import {Subject, takeUntil} from "rxjs";
 export class BlogsComponent implements OnInit, OnDestroy {
 
   blogs: Blog[] = []
-  data: any[] = [];
-  total?: number;
-  limit?: number;
-  page?: number;
-
-  id?: number
-  title?: string
-  description?: string
-  files?: string[]
-
   sub$ = new Subject()
   constructor(
     private blogsService: BlogsService
@@ -38,6 +28,14 @@ export class BlogsComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.blogs = response.data
         console.log(response.data)
+      })
+  }
+
+  deleteItem(id: string) {
+    this.blogsService.deleteItem(id)
+      .pipe()
+      .subscribe(res => {
+        this.getAllBlogs()
       })
   }
 

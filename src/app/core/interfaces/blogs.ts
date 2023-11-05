@@ -9,7 +9,7 @@ export interface Blog {
   createdAt: string;
   updatedAt: string;
   deletedAt?: any;
-  id: number;
+  id: string;
   title: string;
   description: string;
   files: string[];
