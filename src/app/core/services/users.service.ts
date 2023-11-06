@@ -10,8 +10,8 @@ export class UsersService extends BaseService{
 
 
 
-  getUser(id: string):Observable<User> {
-    return this.put<User>(`users/update/${id}`);
+  getUser(user: User):Observable<User> {
+    return this.get<User>(`users/me/`, user);
   }
   getUsers(params: any): Observable<UserResponse> {
     return this.get<UserResponse>('users/all', { params });

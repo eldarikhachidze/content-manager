@@ -49,26 +49,28 @@ export class BlogsAddOrEditComponent implements OnInit {
 
 
     submit() {
-    //   if (this.form.invalid) {
-    //     return;
-    //   }
-    //
-    //   const formData: FormData = new FormData();
-    //   formData.append('id', this.form.get('id')?.value);
-    //   formData.append('title', this.form.get('title')?.value);
-    //   formData.append('description', this.form.get('description')?.value);
-    //   formData.append('files', this.form.get('files')?.value); // Assuming 'files' is the name of your file input field
-    //
-    //   this.blogsService.update(formData).subscribe(res => {
-    //     this.router.navigate(['/blogs']).then(() => {
-    //       this.form.reset();
-    //     });
-    //   });
+      // if (this.form.invalid) {
+      //   return;
+      // }
+      //
+      // const formData: FormData = new FormData();
+      // formData.append('id', this.form.get('id')?.value);
+      // formData.append('title', this.form.get('title')?.value);
+      // formData.append('description', this.form.get('description')?.value);
+      // formData.append('files', this.form.get('files')?.value); // Assuming 'files' is the name of your file input field
+      //
+      // this.blogsService.update(formData).subscribe(res => {
+      //   this.router.navigate(['/blogs']).then(() => {
+      //     this.form.reset();
+      //   });
+      // });
 
-
+      this.form.markAsTouched()
       if (this.form.invalid) {
         return
       }
+
+
       if (this.form.value.id) {
         this.blogsService.update(this.form.value.id, this.form.value)
           .pipe()
@@ -79,6 +81,11 @@ export class BlogsAddOrEditComponent implements OnInit {
               })
           })
       } else {
+        // const formData: FormData = new FormData();
+        // formData.append('id', this.form.get('id')?.value);
+        // formData.append('title', this.form.get('title')?.value);
+        // formData.append('description', this.form.get('description')?.value);
+        // formData.append('files', this.form.get('files')?.value); // Assuming 'files' is the name of your file input field
         this.blogsService.create(this.title, this.description, this.file)
           .pipe()
           .subscribe(res => {
@@ -87,6 +94,7 @@ export class BlogsAddOrEditComponent implements OnInit {
                 this.form.reset()
               })
           })
+        console.log(this.form.value)
       }
     }
   }
