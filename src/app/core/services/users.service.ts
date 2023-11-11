@@ -10,19 +10,19 @@ export class UsersService extends BaseService{
 
 
 
-  getUser(user: User):Observable<User> {
-    return this.get<User>(`users/me/`, user);
+  getUser(id: string):Observable<User> {
+    return this.get<User>(`users/${id}`);
   }
-  getUsers(params: any): Observable<UserResponse> {
-    return this.get<UserResponse>('users/all', { params });
+  getUsers(data: any): Observable<UserResponse> {
+    return this.get<UserResponse>('users', { data });
   }
 
   deleteItem(id: string): Observable<User> {
     return this.delete<User>(`users/delete/${id}`);
   }
 
-  update(id: string, user: User): Observable<User> {
-    return this.put<User>(`users/update/${id}`, user);
+  update(id: string, data: any): Observable<User> {
+    return this.put<User>(`users/update/${id}`, data);
   }
 
 }

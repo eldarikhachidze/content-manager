@@ -1,32 +1,36 @@
 <div class="p-2 d-flex justify-content-end">
-    <button routerLink="/blogs/create" class="btn btn-primary">Add</button>
+  <button routerLink="/blogs/create" class="btn btn-primary">Add</button>
 </div>
 <div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Choice Photo</th>
-            <th>Deleted at</th>
-            <th>Updated at</th>
-            <th>Created at</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of blogs">
-            <th>{{item.title}}</th>
-            <th style="max-width: 250px">{{item.description}}</th>
-            <th>{{item.files}}</th>
-            <th>{{item.deletedAt}}</th>
-            <th>{{item.updatedAt}}</th>
-            <th>{{item.createdAt}}</th>
-            <th>
-                <button class="btn btn-secondary me-2" [routerLink]="['/blogs/edit', item.id]">Edit</button>
-                <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>
-            </th>
-        </tr>
-        </tbody>
-    </table>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Choice Photo</th>
+      <th>Deleted at</th>
+      <th>Updated at</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of blogs">
+      <th>{{item.title}}</th>
+      <th style="max-width: 500px; height: 250px; overflow-y: hidden;">
+        <div style="height: 100%; overflow-y: auto;">
+          {{item.description}}
+        </div>
+      </th>
+      <th>{{item.files}}</th>
+      <th>{{item.deletedAt | date: 'yyyy-MM-dd HH:mm:ss'}}</th>
+      <th>{{ item.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{item.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</th>
+      <th>
+        <button class="btn btn-secondary me-2" [routerLink]="['/blogs/edit', item.id]">Edit</button>
+        <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>
+      </th>
+    </tr>
+    </tbody>
+  </table>
 </div>

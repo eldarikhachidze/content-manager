@@ -24,8 +24,8 @@
       <th>{{item?.timeOfBirth}}</th>
       <th>{{item?.country}}</th>
       <th>{{item?.city}}</th>
-      <th>{{item?.updatedAt}}</th>
-      <th>{{item?.createdAt}}</th>
+      <th>{{item?.updatedAt | date: 'yyyy-MM-dd HH:mm:ss'}}</th>
+      <th>{{item?.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</th>
       <th>
         <button class="btn btn-secondary me-2" [routerLink]="['/users/edit', item.id]">Edit</button>
         <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>

@@ -13,13 +13,9 @@ export class BlogsService extends BaseService {
   // create(formData: FormData): Observable<Blog> {
   //   return this.post<Blog>('blog/create-blog', formData);
   // }
-  create(title: string, description: string, file: File) {
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('files', file);
+  create(data: Blog) {
 
-    return this.post<any>('blog/create-blog', formData);
+    return this.post<any>('blog/create-blog', data);
   }
 
   // create(blog: Blog): Observable<Blog> {

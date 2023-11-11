@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogsService} from "../../../core/services/blogs.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {of, pipe, switchMap} from "rxjs";
+import {of, pipe, Subject, switchMap} from "rxjs";
+import {Blog} from "../../../core/interfaces/blogs";
 
 @Component({
   selector: 'app-blogs-add-or-edit',
   templateUrl: './blogs-add-or-edit.component.html',
   styleUrls: ['./blogs-add-or-edit.component.scss']
 })
-export class BlogsAddOrEditComponent implements OnInit {
+export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     title: new FormControl('', Validators.required),
@@ -17,8 +18,7 @@ export class BlogsAddOrEditComponent implements OnInit {
     files: new FormControl('', Validators.required),
   })
 
-  title: string = ''; // Initialize title
-  description: string = ''; // Initialize description
+  blog$ = new Subject<void>();
   file!: File
 
   constructor(
@@ -46,24 +46,13 @@ export class BlogsAddOrEditComponent implements OnInit {
     })
   }
 
+  ngOnDestroy() {
+    this.blog$.next()
+    this.blog$.complete()
+  }
 
 
-    submit() {
-      // if (this.form.invalid) {
-      //   return;
-      // }
-      //
-      // const formData: FormData = new FormData();
-      // formData.append('id', this.form.get('id')?.value);
-      // formData.append('title', this.form.get('title')?.value);
-      // formData.append('description', this.form.get('description')?.value);
-      // formData.append('files', this.form.get('files')?.value); // Assuming 'files' is the name of your file input field
-      //
-      // this.blogsService.update(formData).subscribe(res => {
-      //   this.router.navigate(['/blogs']).then(() => {
-      //     this.form.reset();
-      //   });
-      // });
+  submit() {
 
       this.form.markAsTouched()
       if (this.form.invalid) {
@@ -81,12 +70,7 @@ export class BlogsAddOrEditComponent implements OnInit {
               })
           })
       } else {
-        // const formData: FormData = new FormData();
-        // formData.append('id', this.form.get('id')?.value);
-        // formData.append('title', this.form.get('title')?.value);
-        // formData.append('description', this.form.get('description')?.value);
-        // formData.append('files', this.form.get('files')?.value); // Assuming 'files' is the name of your file input field
-        this.blogsService.create(this.title, this.description, this.file)
+        this.blogsService.create(this.form.value)
           .pipe()
           .subscribe(res => {
             this.router.navigate(['/blogs'])

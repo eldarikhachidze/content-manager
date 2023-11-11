@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsersService} from "../../../core/services/users.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {of, switchMap} from "rxjs";
+import {of, Subject, switchMap} from "rxjs";
+import {User} from "../../../core/interfaces/user";
 
 @Component({
   selector: 'app-users-add-or-adit',
   templateUrl: './users-add-or-adit.component.html',
   styleUrls: ['./users-add-or-adit.component.scss']
 })
-export class UsersAddOrAditComponent implements OnInit{
+export class UsersAddOrAditComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     firstName: new FormControl('', Validators.required),
@@ -21,6 +22,9 @@ export class UsersAddOrAditComponent implements OnInit{
     email: new FormControl('', [Validators.required, Validators.email]),
     // phone: new FormControl(null, [Validators.required, Validators.minLength(9)]),
   })
+
+  destroy$ = new Subject<void>();
+
 
 
   constructor(
@@ -46,6 +50,11 @@ export class UsersAddOrAditComponent implements OnInit{
         })
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
   submit() {
