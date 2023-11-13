@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {BaseService} from "./base.service";
 import {Observable} from "rxjs";
 import {Blog, PaginatedResponse} from "../interfaces/blogs";
-import {User} from "../interfaces/user";
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +9,9 @@ import {User} from "../interfaces/user";
 export class BlogsService extends BaseService {
 
 
-  // create(formData: FormData): Observable<Blog> {
-  //   return this.post<Blog>('blog/create-blog', formData);
-  // }
-  create(data: Blog) {
-
-    return this.post<any>('blog/create-blog', data);
+  create(formData: FormData): Observable<Blog> {
+    return this.post<Blog>('blog/create-blog', formData);
   }
-
-  // create(blog: Blog): Observable<Blog> {
-  //   return this.post<Blog>('blog/create-blog', blog);
-  // }
 
 
   update(id: string, blog: Blog): Observable<Blog> {

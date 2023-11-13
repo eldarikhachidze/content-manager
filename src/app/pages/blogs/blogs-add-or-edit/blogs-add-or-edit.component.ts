@@ -2,8 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogsService} from "../../../core/services/blogs.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {of, pipe, Subject, switchMap} from "rxjs";
-import {Blog} from "../../../core/interfaces/blogs";
+import {of, Subject, switchMap, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-blogs-add-or-edit',
@@ -15,10 +14,14 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
     id: new FormControl(null),
     title: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    files: new FormControl('', Validators.required),
+    files: new FormControl(null, Validators.required),
   })
 
-  blog$ = new Subject<void>();
+  selectedFile: any
+
+
+  blog$ = new Subject();
+
   file!: File
 
   constructor(
@@ -26,6 +29,10 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {
+  }
+
+  onSelectedFile(event: any) {
+    this.selectedFile = event.target.files[0]
   }
 
 
@@ -40,14 +47,15 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
     ).subscribe(res => {
       if (res) {
         this.form.patchValue({
-          ...res
+          ...res,
         })
+        console.log(res)
       }
     })
   }
 
   ngOnDestroy() {
-    this.blog$.next()
+    this.blog$.next(this.blog$)
     this.blog$.complete()
   }
 
@@ -62,7 +70,7 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
 
       if (this.form.value.id) {
         this.blogsService.update(this.form.value.id, this.form.value)
-          .pipe()
+          .pipe(takeUntil(this.blog$))
           .subscribe(res => {
             this.router.navigate(['/blogs'])
               .then(() => {
@@ -70,15 +78,19 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
               })
           })
       } else {
-        this.blogsService.create(this.form.value)
-          .pipe()
-          .subscribe(res => {
-            this.router.navigate(['/blogs'])
-              .then(() => {
-                this.form.reset()
-              })
-          })
+        const fd = new FormData()
+        fd.append('files', this.selectedFile, this.selectedFile?.name)
+        fd.append('title', this.form.value.title)
+        fd.append('description', this.form.value.description)
+
+        this.blogsService.create(fd).subscribe(res => {
+          this.router.navigate(['/blogs'])
+            .then(() => {
+              this.form.reset()
+            })
+        })
         console.log(this.form.value)
       }
     }
-  }
+
+}
