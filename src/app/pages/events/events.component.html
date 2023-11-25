@@ -1,0 +1,48 @@
+<div class="p-2 d-flex justify-content-end">
+  <button routerLink="/events/create" class="btn btn-primary">Add</button>
+</div>
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Photo</th>
+      <th>Organized By</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Price</th>
+      <th>Deleted at</th>
+      <th>Updated at</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of events">
+      <th></th>
+      <th style="max-width: 500px; height: 250px; overflow-y: hidden;">
+        <div style="height: 100%; overflow-y: auto;">
+
+        </div>
+      </th>
+      <th style="width: 300px; height: 250px">
+        <img style="width: 100%; height: 100%;" [src]="">
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>
+        <button class="btn btn-secondary me-2" [routerLink]="['/events/edit']">Edit</button>
+        <button class="btn btn-danger" (click)="deleteItem()">Remove</button>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

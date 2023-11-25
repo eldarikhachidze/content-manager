@@ -31,10 +31,6 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  onSelectedFile(event: any) {
-    this.selectedFile = event.target.files[0]
-  }
-
 
   ngOnInit(): void {
     this.route.params.pipe(
@@ -54,43 +50,45 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
-    this.blog$.next(this.blog$)
-    this.blog$.complete()
+  onSelectedFile(event: any) {
+    this.selectedFile = event.target.files[0]
   }
-
 
   submit() {
 
-      this.form.markAsTouched()
-      if (this.form.invalid) {
-        return
-      }
+    this.form.markAsTouched()
+    if (this.form.invalid) {
+      return
+    }
 
 
-      if (this.form.value.id) {
-        this.blogsService.update(this.form.value.id, this.form.value)
-          .pipe(takeUntil(this.blog$))
-          .subscribe(res => {
-            this.router.navigate(['/blogs'])
-              .then(() => {
-                this.form.reset()
-              })
-          })
-      } else {
-        const fd = new FormData()
-        fd.append('files', this.selectedFile, this.selectedFile?.name)
-        fd.append('title', this.form.value.title)
-        fd.append('description', this.form.value.description)
-
-        this.blogsService.create(fd).subscribe(res => {
+    if (this.form.value.id) {
+      this.blogsService.update(this.form.value.id, this.form.value)
+        .pipe(takeUntil(this.blog$))
+        .subscribe(res => {
           this.router.navigate(['/blogs'])
             .then(() => {
               this.form.reset()
             })
         })
-        console.log(this.form.value)
-      }
+    } else {
+      const fd = new FormData()
+      fd.append('files', this.selectedFile, this.selectedFile?.name)
+      fd.append('title', this.form.value.title)
+      fd.append('description', this.form.value.description)
+
+      this.blogsService.create(fd).subscribe(res => {
+        this.router.navigate(['/blogs'])
+          .then(() => {
+            this.form.reset()
+          })
+      })
     }
+  }
+
+  ngOnDestroy() {
+    this.blog$.next(this.blog$)
+    this.blog$.complete()
+  }
 
 }
