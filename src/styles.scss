@@ -15,6 +15,18 @@ li {
   height: 50px;
 
 }
+
+textarea {
+  height: 200px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+  color: black;
+  outline: none;
+}
 .login-input {
   width: 100%;
   padding: 10px;
