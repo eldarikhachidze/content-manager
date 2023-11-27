@@ -9,7 +9,7 @@ import {Event} from "../../core/interfaces/events";
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent implements OnInit, OnDestroy{
+export class EventsComponent implements OnInit, OnDestroy {
 
   events: Event[] = []
   sub$ = new Subject()
@@ -22,20 +22,21 @@ export class EventsComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.getAllEvents()
   }
 
 
   getAllEvents() {
     this.eventsService.getAllEvents()
-      // .pipe(takeUntil(this.sub$))
-      // .subscribe((response) => {
-      //   this.blogs = response.data
-      //   console.log(response.data)
-      // })
+      .pipe(takeUntil(this.sub$))
+      .subscribe((response) => {
+        this.events = response
+        console.log(response)
+      })
   }
 
-  deleteItem() {
-    this.eventsService.deleteItem()
+  deleteItem(id: string) {
+    this.eventsService.deleteItem(id)
       .pipe()
       .subscribe(res => {
         this.getAllEvents()
@@ -44,7 +45,5 @@ export class EventsComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
   }
-
-
 
 }

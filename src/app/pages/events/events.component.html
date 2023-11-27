@@ -20,26 +20,26 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of events">
-      <th></th>
+      <th>{{item.name}}</th>
       <th style="max-width: 500px; height: 250px; overflow-y: hidden;">
         <div style="height: 100%; overflow-y: auto;">
-
+          {{item.description}}
         </div>
       </th>
       <th style="width: 300px; height: 250px">
-        <img style="width: 100%; height: 100%;" [src]="">
+        <img style="width: 100%; height: 100%;" [src]="'http://localhost:3000/' + item.files">
       </th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>{{ item.location }}</th>
+      <th>{{ item.organizedBy }}</th>
+      <th>{{ item.startDate | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.endDate | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.price }}</th>
+      <th>{{ item.deletedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
       <th>
-        <button class="btn btn-secondary me-2" [routerLink]="['/events/edit']">Edit</button>
-        <button class="btn btn-danger" (click)="deleteItem()">Remove</button>
+        <button class="btn btn-secondary me-2" [routerLink]="['/events/edit', item.id]">Edit</button>
+        <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>
       </th>
     </tr>
     </tbody>

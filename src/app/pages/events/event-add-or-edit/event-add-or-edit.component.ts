@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EventsService} from "../../../core/services/events.service";
-import {Subject} from "rxjs";
+import {of, Subject, switchMap, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-event-add-or-edit',
@@ -13,11 +13,11 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
 
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
-    title: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     files: new FormControl(null, Validators.required),
-    location: new FormControl('', Validators.required),
     organizedBy: new FormControl('', Validators.required),
+    location: new FormControl('', Validators.required),
     startDate: new FormControl('', Validators.required),
     endDate: new FormControl('', Validators.required),
     price: new FormControl('', Validators.required)
@@ -30,11 +30,29 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
+    this.route.params.pipe(
+      switchMap((params: any) => {
+        if (params['id']) {
+          return this.eventsService.getOne(params['id'])
+        }
+        return of(null)
+      })
+    ).subscribe(res => {
+      if (res) {
+        // const fileName = this.selectedFile?.name
+        this.form.patchValue({
+          ...res,
+          // fileName
+        })
+        console.log(res)
+      }
+    })
   }
 
 
@@ -43,6 +61,34 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
     this.form.markAsTouched()
     if (this.form.invalid) {
       return
+    }
+
+    if (this.form.value.id) {
+      this.eventsService.update(this.form.value.id, this.form.value)
+        .pipe(takeUntil(this.event$))
+        .subscribe(res => {
+          this.router.navigate(['/events'])
+            .then(() => {
+              this.form.reset()
+            })
+        })
+    } else {
+      const fd = new FormData()
+      fd.append('files', this.selectedFile, this.selectedFile?.name)
+      fd.append('name', this.form.value.name)
+      fd.append('description', this.form.value.description)
+      fd.append('organizedBy', this.form.value.organizedBy)
+      fd.append('location', this.form.value.location)
+      fd.append('startDate', this.form.value.startDate)
+      fd.append('endDate', this.form.value.endDate)
+      fd.append('price', this.form.value.price)
+
+      this.eventsService.create(fd).subscribe(res => {
+        this.router.navigate(['/events'])
+          .then(() => {
+            this.form.reset()
+          })
+      })
     }
 
   }

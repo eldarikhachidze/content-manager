@@ -2,19 +2,25 @@
 
   <div class="input-group input-group-lg">
     <label>Title</label>
-    <input class="login-input" formControlName="title">
+    <input class="login-input" formControlName="name">
   </div>
   <div class="input-group">
     <label>Description</label>
-    <textarea class="form-control" formControlName="description" placeholder="text area" aria-label="With textarea"></textarea>
+    <textarea class="form-control" formControlName="description" placeholder="text area" aria-label="With textarea">
+    </textarea>
   </div>
   <div class="input-group mb-3">
     <label>Upload Image</label>
-    <input type="file" class="form-control" formControlName="files" (change)="onSelectedFile($event)" id="inputGroupFile01">
+    <input type="file" class="form-control" formControlName="files" (change)="onSelectedFile($event)"
+           id="inputGroupFile01">
   </div>
   <div class="input-group input-group-lg">
     <label>Organized By</label>
     <input class="login-input" formControlName="organizedBy">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>Location</label>
+    <input class="login-input" formControlName="location">
   </div>
   <div class="input-group input-group-lg">
     <label>Start Date</label>

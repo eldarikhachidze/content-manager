@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BaseService} from "./base.service";
 import {Observable} from "rxjs";
 import {Blog} from "../interfaces/blogs";
@@ -14,7 +14,6 @@ export class EventsService extends BaseService {
     return this.post<Event>('events', formData);
   }
 
-
   update(id: string, event: Event): Observable<Blog> {
     return this.put(`events/${id}`, event)
   }
@@ -23,12 +22,12 @@ export class EventsService extends BaseService {
     return this.get<Event>(`events/${id}`)
   }
 
-  getAllEvents(): Observable<Event> {
-    return this.get<Event>('');
+  getAllEvents(): Observable<Event[]> {
+    return this.get<Event[]>('events');
   }
 
-  deleteItem(): Observable<Event> {
-    return this.delete<Event>(`events/`);
+  deleteItem(id: string): Observable<Event> {
+    return this.delete<Event>(`events/${id}`);
   }
 
 }
