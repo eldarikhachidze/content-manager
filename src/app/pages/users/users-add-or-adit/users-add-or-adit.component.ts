@@ -20,28 +20,27 @@ export class UsersAddOrAditComponent implements OnInit, OnDestroy {
     country: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    // phone: new FormControl(null, [Validators.required, Validators.minLength(9)]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9)]),
   })
 
   destroy$ = new Subject<void>();
 
 
-
   constructor(
-      private usersService: UsersService,
-      private router: Router,
-      private route: ActivatedRoute
+    private usersService: UsersService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
     this.route.params.pipe(
-        switchMap((params: any) => {
-          if (params['id']) {
-            return this.usersService.getUser(params['id'])
-          }
-          return of(null)
-        })
+      switchMap((params: any) => {
+        if (params['id']) {
+          return this.usersService.getUser(params['id'])
+        }
+        return of(null)
+      })
     ).subscribe(res => {
       if (res) {
         this.form.patchValue({
@@ -63,13 +62,13 @@ export class UsersAddOrAditComponent implements OnInit, OnDestroy {
     }
     if (this.form.value.id) {
       this.usersService.update(this.form.value.id, this.form.value)
-          .pipe()
-          .subscribe(res => {
-            this.router.navigate(['/users'])
-                .then(() => {
-                  this.form.reset()
-                })
-          })
+        .pipe()
+        .subscribe(res => {
+          this.router.navigate(['/users'])
+            .then(() => {
+              this.form.reset()
+            })
+        })
     }
   }
 

@@ -1,0 +1,43 @@
+<div class="p-2 d-flex justify-content-end">
+  <button routerLink="/events/create" class="btn btn-primary">Add</button>
+</div>
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ჩარიცხული</th>
+      <th>First name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Event Name</th>
+      <th>Event Description</th>
+      <th>Event Start Date</th>
+      <th>Event End Date</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of eventSubscribe.data">
+      <td>
+        <input type="checkbox" id="myCheckbox" [(ngModel)]="myCheckboxState" (change)="onCheckboxChange()">
+      </td>
+      <td>{{ item.user.firstName }}</td>
+      <td>{{ item.user.email }}</td>
+      <td>{{ item.user.phoneNumber }}</td>
+      <td>{{ item.event.name }}</td>
+      <th style="max-width: 500px; height: 250px; overflow-y: hidden;">
+        <div style="height: 100%; overflow-y: auto;">
+          {{item.event.description}}
+        </div>
+      </th>
+      <td>{{ item.event.startDate | date: 'yyyy-MM-dd' }}</td>
+      <td>{{ item.event.endDate | date }}</td>
+      <th>
+                <button class="btn btn-secondary me-2" [routerLink]="['/events/edit', item.id]">Edit</button>
+<!--                <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>-->
+      </th>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

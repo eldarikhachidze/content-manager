@@ -1,3 +1,5 @@
+import {User} from "./user";
+
 export interface Event {
   id: string;
   name: string;
@@ -14,5 +16,26 @@ export interface Event {
 }
 
 export interface EventsResponse {
+  data: Event[];
+  total: number;
+  limit: number;
+  page: number;
+}
 
+export interface EventSubscribe {
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: any;
+  id: number;
+  userId: number;
+  eventId: number;
+  user: User;
+  event: Event;
+}
+
+export interface EventSubscribeResponse {
+  data: EventSubscribe[];
+  total: number;
+  limit: number;
+  page: number;
 }

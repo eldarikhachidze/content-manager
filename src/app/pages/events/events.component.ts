@@ -30,8 +30,7 @@ export class EventsComponent implements OnInit, OnDestroy {
     this.eventsService.getAllEvents()
       .pipe(takeUntil(this.sub$))
       .subscribe((response) => {
-        this.events = response
-        console.log(response)
+        this.events = response.data
       })
   }
 

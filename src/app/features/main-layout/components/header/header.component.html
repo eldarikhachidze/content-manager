@@ -1,13 +1,17 @@
 <div>
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+  <header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
       <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
       </a>
     </div>
 
     <li>
-      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-link text-white">
+      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+         class="nav-link text-white">
         <h3>
           Home
         </h3>
@@ -38,6 +42,13 @@
       <a routerLink="/subscribers" routerLinkActive="active-link" class="nav-link text-white">
         <h3>
           Subscribers
+        </h3>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/event-subscribe" routerLinkActive="active-link" class="nav-link text-white">
+        <h3>
+          event-subscribe
         </h3>
       </a>
     </li>

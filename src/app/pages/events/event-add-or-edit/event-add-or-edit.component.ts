@@ -45,12 +45,9 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(res => {
       if (res) {
-        // const fileName = this.selectedFile?.name
         this.form.patchValue({
           ...res,
-          // fileName
         })
-        console.log(res)
       }
     })
   }

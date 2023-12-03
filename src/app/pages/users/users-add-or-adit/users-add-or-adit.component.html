@@ -1,32 +1,36 @@
 <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-    <div class="input-group input-group-lg">
-        <label>First Name</label>
-        <input class="login-input" type="text" formControlName="firstName">
-    </div>
-    <div class="input-group input-group-lg">
-        <label>Last Name</label>
-        <input class="login-input" type="text" formControlName="lastName">
-    </div>
-    <div class="input-group input-group-lg">
-        <label>PLease Enter Your Email Address</label>
-        <input class="login-input" type="email" formControlName="email">
-    </div>
-    <div class="input-group input-group-lg">
-        <label>Birth Date</label>
-        <input class="login-input" formControlName="birthDate">
-    </div>
-    <div class="input-group input-group-lg">
-        <label>Time of Birth</label>
-        <input class="login-input" formControlName="timeOfBirth">
-    </div>
-    <div class="input-group input-group-lg">
-        <label>Country</label>
-        <input class="login-input" formControlName="country">
-    </div>
-    <div class="input-group input-group-lg">
-        <label>City</label>
-        <input class="login-input" formControlName="city">
-    </div>
-    <button [disabled]="form.invalid" class="btn btn-outline-primary me-2" type="submit">Save</button>
+  <div class="input-group input-group-lg">
+    <label>First Name</label>
+    <input class="login-input" type="text" formControlName="firstName">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>Last Name</label>
+    <input class="login-input" type="text" formControlName="lastName">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>PLease Enter Your Email Address</label>
+    <input class="login-input" type="email" formControlName="email">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>Birth Date</label>
+    <input class="login-input" formControlName="birthDate">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>Time of Birth</label>
+    <input class="login-input" formControlName="timeOfBirth">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>Country</label>
+    <input class="login-input" formControlName="country">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>City</label>
+    <input class="login-input" formControlName="city">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>Phone Number</label>
+    <input class="login-input" formControlName="phoneNumber">
+  </div>
+  <button [disabled]="form.invalid" class="btn btn-outline-primary me-2" type="submit">Save</button>
 </form>
 

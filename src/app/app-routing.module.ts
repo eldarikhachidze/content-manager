@@ -31,6 +31,10 @@ const routes: Routes = [
         path: 'subscribers',
         loadChildren: () => import('./pages/subscribers/subscribers.module').then(m => m.SubscribersModule)
       },
+      {
+        path: 'event-subscribe',
+        loadChildren: () => import('./pages/event-subscribe/event-subscribe.module').then(m => m.EventSubscribeModule)
+      },
     ]
   }
 ];
