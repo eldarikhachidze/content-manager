@@ -18,23 +18,22 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of eventSubscribe.data">
-      <td>
+      <th>
         <input type="checkbox" id="myCheckbox" [(ngModel)]="myCheckboxState" (change)="onCheckboxChange()">
-      </td>
-      <td>{{ item.user.firstName }}</td>
-      <td>{{ item.user.email }}</td>
-      <td>{{ item.user.phoneNumber }}</td>
-      <td>{{ item.event.name }}</td>
+      </th>
+      <th>{{ item.user.firstName }}</th>
+      <th>{{ item.user.email }}</th>
+      <th>{{ item.user.phoneNumber }}</th>
+      <th>{{ item.event.name }}</th>
       <th style="max-width: 500px; height: 250px; overflow-y: hidden;">
         <div style="height: 100%; overflow-y: auto;">
           {{item.event.description}}
         </div>
       </th>
-      <td>{{ item.event.startDate | date: 'yyyy-MM-dd' }}</td>
-      <td>{{ item.event.endDate | date }}</td>
+      <th>{{ item.event.startDate | date: 'yyyy-MM-dd' }}</th>
+      <th>{{ item.event.endDate | date }}</th>
       <th>
-                <button class="btn btn-secondary me-2" [routerLink]="['/events/edit', item.id]">Edit</button>
-<!--                <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>-->
+        <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>
       </th>
     </tr>
     </tbody>

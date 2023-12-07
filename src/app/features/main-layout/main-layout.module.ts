@@ -15,7 +15,7 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
     CommonModule,
     RouterOutlet,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
   ],
   exports: [
     MainLayoutComponent

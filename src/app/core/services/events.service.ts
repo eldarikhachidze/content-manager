@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseService} from "./base.service";
 import {Observable} from "rxjs";
 import {Blog} from "../interfaces/blogs";
-import {Event, EventsResponse, EventSubscribeResponse} from "../interfaces/events";
+import {Event, EventsResponse, EventSubscribe, EventSubscribeResponse} from "../interfaces/events";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,10 @@ export class EventsService extends BaseService {
 
   getEventSubscribe(): Observable<EventSubscribeResponse> {
     return this.get<EventSubscribeResponse>('events-subscription')
+  }
+
+  deleteEventSubscribe(id: string): Observable<EventSubscribe> {
+    return this.delete<EventSubscribe>(`events-subscription/${id}`);
   }
 
 }

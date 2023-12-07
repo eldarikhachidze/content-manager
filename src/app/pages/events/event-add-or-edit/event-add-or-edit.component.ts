@@ -16,8 +16,8 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     files: new FormControl(null, Validators.required),
-    organizedBy: new FormControl('', Validators.required),
-    location: new FormControl('', Validators.required),
+    organizedBy: new FormControl('ხატია ბედოშვილი', Validators.required),
+    location: new FormControl('online, ZOOM', Validators.required),
     startDate: new FormControl('', Validators.required),
     endDate: new FormControl('', Validators.required),
     price: new FormControl('', Validators.required)

@@ -26,7 +26,7 @@ export interface EventSubscribe {
   createdAt: string;
   updatedAt: string;
   deletedAt?: any;
-  id: number;
+  id: string;
   userId: number;
   eventId: number;
   user: User;

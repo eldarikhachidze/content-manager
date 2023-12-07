@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { EventSubscribeResponse} from "../../core/interfaces/events";
-import {Subject, takeUntil} from "rxjs";
+import {Subject, switchMap, takeUntil} from "rxjs";
 import {Router} from "@angular/router";
 import {EventsService} from "../../core/services/events.service";
 
@@ -46,11 +46,18 @@ export class EventSubscribeComponent implements OnInit, OnDestroy {
   }
 
   deleteItem(id: string) {
-    // this.eventsService.deleteItem(id)
-    //   .pipe()
-    //   .subscribe(res => {
-    //     this.getAllEvents()
-    //   })
+    this.eventsService.deleteEventSubscribe(id)
+      .pipe(
+        // If you want to wait for the delete operation to complete before refreshing,
+        // you can use switchMap instead of subscribe.
+        switchMap(() => this.eventsService.getEventSubscribe())
+      )
+      .subscribe((response) => {
+        this.eventSubscribe.data = response.data;
+        this.eventSubscribe.total = response.total;
+        this.eventSubscribe.limit = response.limit;
+        this.eventSubscribe.page = response.page;
+      });
   }
 
   ngOnDestroy(): void {
