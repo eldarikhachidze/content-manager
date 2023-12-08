@@ -1,0 +1,34 @@
+<div class="p-2 d-flex justify-content-end">
+  <button routerLink="/blogs/create" class="btn btn-primary">Add</button>
+</div>
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Photo</th>
+      <th>Deleted at</th>
+      <th>Updated at</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of slider">
+      <th>{{ item.description }}</th>
+      <th>{{ item.url}}</th>
+      <th style="width: 300px; height: 250px">
+        <img style="width: 100%; height: 100%;" [src]="'http://localhost:3000/' + item.files">
+      </th>
+      <th>{{ item.deletedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>
+<!--        <button class="btn btn-secondary me-2" [routerLink]="['/blogs/edit', item.id]">Edit</button>-->
+<!--        <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>-->
+      </th>
+    </tr>
+    </tbody>
+  </table>
+</div>

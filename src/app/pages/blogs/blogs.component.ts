@@ -27,7 +27,6 @@ export class BlogsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.sub$))
       .subscribe((response) => {
         this.blogs = response.data
-        console.log(response.data)
       })
   }
 

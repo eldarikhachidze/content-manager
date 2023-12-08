@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {MainLayoutComponent} from "./features/main-layout/main-layout.component";
 
 const routes: Routes = [
@@ -35,6 +35,10 @@ const routes: Routes = [
         path: 'event-subscribe',
         loadChildren: () => import('./pages/event-subscribe/event-subscribe.module').then(m => m.EventSubscribeModule)
       },
+      {
+        path: 'slider',
+        loadChildren: () => import('./pages/slider/slider.module').then(m => m.SliderModule)
+      },
     ]
   }
 ];
@@ -43,4 +47,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
