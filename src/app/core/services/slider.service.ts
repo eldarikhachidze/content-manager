@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {BaseService} from "./base.service";
 import {Slider, SliderResponse} from "../interfaces/slider";
@@ -7,16 +7,15 @@ import {Data} from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
-export class SliderService extends BaseService{
+export class SliderService extends BaseService {
 
   create(body: Data): Observable<Slider> {
     return this.post<Slider>('event-slider', body);
   }
 
-
-  // update(id: string, blog: Blog): Observable<Blog> {
-  //   return this.put(`blog/update-blog/${id}`, blog)
-  // }
+  update(id: string, slider: Slider): Observable<Slider> {
+    return this.put<Slider>(`event-slider/${id}`, slider)
+  }
 
   // getOne(id: string): Observable<Blog> {
   //   return this.get(`blog/get-blog/${id}`)
@@ -25,8 +24,8 @@ export class SliderService extends BaseService{
   getAllSliders(): Observable<SliderResponse> {
     return this.get<SliderResponse>('event-slider');
   }
-  //
-  // deleteItem(id: string): Observable<Blog> {
-  //   return this.delete<Blog>(`blog/delete-blog/${id}`);
-  // }
+
+  deleteItem(id: string): Observable<Slider> {
+    return this.delete<Slider>(`event-slider/${id}`);
+  }
 }

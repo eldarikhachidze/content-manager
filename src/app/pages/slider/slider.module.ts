@@ -1,17 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { SliderRoutingModule } from './slider-routing.module';
-import { SliderComponent } from './slider.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {SliderRoutingModule} from './slider-routing.module';
+import {SliderComponent} from './slider.component';
+import {SliderAddOrEditComponent} from "./slider-add-or-edit/slider-add-or-edit.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
-    SliderComponent
+    SliderComponent,
+    SliderAddOrEditComponent
   ],
   imports: [
     CommonModule,
-    SliderRoutingModule
+    SliderRoutingModule,
+    ReactiveFormsModule
   ]
 })
-export class SliderModule { }
+export class SliderModule {
+}

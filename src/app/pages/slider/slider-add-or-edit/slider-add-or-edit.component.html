@@ -1,0 +1,17 @@
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="input-group input-group-lg">
+    <label>Title</label>
+    <input class="login-input" formControlName="description">
+  </div>
+  <div class="input-group input-group-lg">
+    <label>Url</label>
+    <input class="login-input" formControlName="url">
+  </div>
+  <div class="input-group mb-3">
+    <label>Upload Image</label>
+    <input type="file" class="form-control" formControlName="files" (change)="onSelectedFile($event)" id="inputGroupFile01">
+  </div>
+
+  <button [disabled]="form.invalid" class="btn btn-outline-primary me-2" type="submit">Save</button>
+</form>

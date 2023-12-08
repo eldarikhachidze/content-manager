@@ -5,7 +5,7 @@ export interface Slider {
   deletedAt?: any;
   createdAt: string;
   updatedAt: string;
-  id: number;
+  id: string;
 }
 
 export interface SliderResponse {
