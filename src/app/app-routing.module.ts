@@ -39,6 +39,14 @@ const routes: Routes = [
         path: 'slider',
         loadChildren: () => import('./pages/slider/slider.module').then(m => m.SliderModule)
       },
+      {
+        path: 'prognoses',
+        loadChildren: () => import('./pages/prognoses/prognoses.module').then(m => m.PrognosesModule)
+      },
+      {
+        path: 'category',
+        loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule)
+      },
     ]
   }
 ];

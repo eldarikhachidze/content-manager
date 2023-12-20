@@ -1,0 +1,29 @@
+<div class="p-2 d-flex justify-content-end">
+  <button routerLink="/category/create" class="btn btn-primary">Add</button>
+</div>
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of categories">
+      <th style="max-width: 500px; height: 250px; overflow-y: hidden;">
+        <div style="height: 100%; overflow-y: auto;">
+          {{ item.name }}
+        </div>
+      </th>
+      <th>{{ item.deletedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+      <th>
+        <button class="btn btn-secondary me-2" [routerLink]="['/category/edit', item.id]">Edit</button>
+        <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
