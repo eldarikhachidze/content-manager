@@ -45,7 +45,6 @@ export class BlogsAddOrEditComponent implements OnInit, OnDestroy {
         this.form.patchValue({
           ...res,
         })
-        console.log(res)
       }
     })
   }

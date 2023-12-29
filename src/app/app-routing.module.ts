@@ -47,6 +47,10 @@ const routes: Routes = [
         path: 'category',
         loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule)
       },
+      {
+        path: 'sings',
+        loadChildren: () => import('./pages/astrology-sings/astrology-sings.module').then(m => m.AstrologySingsModule)
+      },
     ]
   }
 ];
