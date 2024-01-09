@@ -36,13 +36,19 @@ export class AstrologySingsEditComponent implements OnInit{
   ngOnInit(): void {
    this.route.params.pipe(
      switchMap((params: any) => {
+       console.log(params['id'])
        if (params['id']) {
          return this.singsService.getOne(params['id'])
        }
        return of(null)
      })
    ).subscribe(res => {
-     console.log(res)
+     if (res) {
+       console.log(this.form.value.id)
+       this.form.patchValue({
+         ...res,
+       })
+     }
    })
   }
 
@@ -51,6 +57,7 @@ export class AstrologySingsEditComponent implements OnInit{
   }
 
   submit() {
+    console.log(this.form.value.id, this.form.value)
 
     this.form.markAsTouched()
     if (this.form.invalid) {

@@ -1,4 +1,5 @@
 export interface AstrologySings {
+  id: string;
   files: string[];
   name: string;
   deletedAt?: any;
@@ -6,5 +7,4 @@ export interface AstrologySings {
   endDate?: any;
   createdAt: string;
   updatedAt: string;
-  id: number;
 }
