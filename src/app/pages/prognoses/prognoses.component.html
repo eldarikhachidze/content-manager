@@ -1,7 +1,18 @@
 <div class="p-2 d-flex justify-content-end">
   <button routerLink="/prognoses/create" class="btn btn-primary">Add</button>
 </div>
-<div>
+<div class="progress-container">
+  <div class="sidebar">
+    <div class="list-group">
+      <a *ngFor="let category of categories$ | async"
+         [routerLink]="['/prognoses']"
+         [queryParams]="{category: category.id}"
+         routerLinkActive="active"
+         class="list-group-item list-group-item-action">
+        {{category.name}}
+      </a>
+    </div>
+  </div>
   <table class="table">
     <thead>
     <tr>

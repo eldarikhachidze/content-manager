@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {PrognosesService} from "../../core/services/prognoses.service";
 import {Prognoses} from "../../core/interfaces/prognoses";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subject, takeUntil} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
+import {Category} from "../../core/interfaces/category";
+import {CategoryService} from "../../core/services/category.service";
 
 @Component({
   selector: 'app-prognoses',
@@ -10,6 +12,7 @@ import {Subject, takeUntil} from "rxjs";
   styleUrls: ['./prognoses.component.scss']
 })
 export class PrognosesComponent implements OnInit {
+  categories$: Observable<Category[]> = this.categoryService.getAllCategories()
 
   prognoses: Prognoses[] = []
   categoryId?: number
@@ -17,6 +20,7 @@ export class PrognosesComponent implements OnInit {
 
   constructor(
     private prognosesService: PrognosesService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
   ) {
   }
@@ -24,13 +28,16 @@ export class PrognosesComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.categoryId = params['category']
-      console.log('Category ID:', this.categoryId); // Add this line
-      this.getPrognoses()
+      if (this.categoryId === undefined) {
+        this.categoryId = 1;
+      }
+      this.getPrognoses();
     })
   }
 
   getPrognoses() {
     const params = {
+      categoryId: this.categoryId,
       limit: 12
     }
     this.prognosesService.getAllPrognoses(params)

@@ -1,3 +1,14 @@
 .active-link {
-  color: dodgerblue !important;
+  color: red !important;
+}
+header {
+  gap: 25px;
+}
+a {
+  background-color: #0d6efd;
+  border-radius: 5px;
+  h3 {
+    padding: 15px;
+    color: #FFFFFF!important;
+  }
 }
