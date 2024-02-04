@@ -58,4 +58,16 @@ textarea {
   gap: 10px;
 }
 
+//*pagination*//
+.pagination-bot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:30px 0 100px;
+}
 
+
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

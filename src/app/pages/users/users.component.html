@@ -32,6 +32,18 @@
         <button class="btn btn-danger" (click)="deleteItem(item.id)">Remove</button>
       </th>
     </tr>
+    <div class="pagination-bot">
+      <ngb-pagination
+        [collectionSize]="total"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [maxSize]="10"
+        [rotate]="true"
+        [ellipses]="false"
+        [boundaryLinks]="true"
+        (pageChange)="pageChangeEvent($event)"
+      ></ngb-pagination>
+    </div>
     </tbody>
   </table>
 </div>

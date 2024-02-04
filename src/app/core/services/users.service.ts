@@ -13,8 +13,8 @@ export class UsersService extends BaseService{
   getUser(id: string):Observable<User> {
     return this.get<User>(`users/${id}`);
   }
-  getUsers(data: any): Observable<UserResponse> {
-    return this.get<UserResponse>('users', { data });
+  getUsers(params = {}): Observable<UserResponse> {
+    return this.get<UserResponse>('users', params);
   }
 
   deleteItem(id: string): Observable<User> {

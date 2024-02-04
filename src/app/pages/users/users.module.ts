@@ -5,6 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { UsersAddOrAditComponent } from './users-add-or-adit/users-add-or-adit.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -12,10 +13,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     UsersComponent,
     UsersAddOrAditComponent
   ],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        UsersRoutingModule,
+        ReactiveFormsModule,
+        NgbPagination
+    ]
 })
 export class UsersModule { }

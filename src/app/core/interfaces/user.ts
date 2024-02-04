@@ -23,8 +23,7 @@ export interface Token {
 
 export interface UserResponse {
   data: User[];
-  order: string;
-  page: number
+  total: number;
   limit: number;
-  search: string;
+  page: number;
 }

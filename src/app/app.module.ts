@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {MainLayoutModule} from "./features/main-layout/main-layout.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./core/interceptor/auth.interceptor";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {AuthInterceptor} from "./core/interceptor/auth.interceptor";
     BrowserModule,
     AppRoutingModule,
     MainLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     {
