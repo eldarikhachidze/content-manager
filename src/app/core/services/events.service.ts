@@ -22,8 +22,8 @@ export class EventsService extends BaseService {
     return this.get<Event>(`events/${id}`)
   }
 
-  getAllEvents(): Observable<EventsResponse> {
-    return this.get<EventsResponse>('events');
+  getAllEvents(params = {}): Observable<EventsResponse> {
+    return this.get<EventsResponse>('events', params);
   }
 
   deleteItem(id: string): Observable<Event> {

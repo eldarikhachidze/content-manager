@@ -73,7 +73,7 @@ export class SubscribersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub$.next(null)
+    this.sub$.next(this.sub$)
     this.sub$.complete()
   }
 

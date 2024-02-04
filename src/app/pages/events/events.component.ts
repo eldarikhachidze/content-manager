@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EventsService} from "../../core/services/events.service";
 import {Subject, takeUntil} from "rxjs";
 import {Event} from "../../core/interfaces/events";
@@ -11,12 +11,17 @@ import {Event} from "../../core/interfaces/events";
 })
 export class EventsComponent implements OnInit, OnDestroy {
 
+  total: number = 0;
+  pageSize: number = 10;
+  page: number = 1;
   events: Event[] = []
+
   sub$ = new Subject()
 
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private eventsService: EventsService
   ) {
   }
@@ -27,11 +32,36 @@ export class EventsComponent implements OnInit, OnDestroy {
 
 
   getAllEvents() {
-    this.eventsService.getAllEvents()
+    const params = {
+      page: this.page,
+      limit: this.pageSize
+    };
+    this.eventsService.getAllEvents(params)
       .pipe(takeUntil(this.sub$))
       .subscribe((response) => {
         this.events = response.data
+        this.total = response.total;
+        this.page = response.page;
+        this.setQueryParams();
       })
+  }
+
+  pageChangeEvent(event: number) {
+    this.page = event;
+    this.getAllEvents();
+  }
+
+  setQueryParams() {
+    this.router
+      .navigate([], {
+        relativeTo: this.route,
+        queryParams: {
+          page: this.page,
+          pageSize: this.pageSize,
+        },
+        queryParamsHandling: 'merge',
+      })
+      .then();
   }
 
   deleteItem(id: string) {
@@ -43,6 +73,8 @@ export class EventsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sub$.next(this.sub$)
+    this.sub$.complete()
   }
 
 }
