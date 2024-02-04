@@ -1,5 +1,4 @@
 export interface Subscribe {
-
   id: string;
   email: string;
   active: boolean;
@@ -8,7 +7,7 @@ export interface Subscribe {
   updatedAt: string;
 }
 
-export interface SubscribersResponse<T> {
+export interface SubscribersResponse {
   data: Subscribe[];
   total: number;
   limit: number;

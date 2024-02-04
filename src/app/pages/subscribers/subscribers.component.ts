@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {User} from "../../core/interfaces/user";
 import {Subject, takeUntil} from "rxjs";
-import {UsersService} from "../../core/services/users.service";
 import {SubscribeService} from "../../core/services/subscribe.service";
 import {Subscribe} from "../../core/interfaces/subscribe";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-subscribers',
@@ -12,11 +11,16 @@ import {Subscribe} from "../../core/interfaces/subscribe";
 })
 export class SubscribersComponent implements OnInit, OnDestroy {
 
+  total: number = 0;
+  pageSize: number = 10;
+  page: number = 1;
   subscribers: Subscribe[] = []
 
   sub$ = new Subject()
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private subscribeService: SubscribeService
   ) {
   }
@@ -26,13 +30,40 @@ export class SubscribersComponent implements OnInit, OnDestroy {
   }
 
   getSubscribers() {
-    this.subscribeService.getSubscribers({})
+    const params = {
+      page: this.page,
+      limit: this.pageSize
+    };
+    this.subscribeService.getSubscribers(params)
       .pipe(takeUntil(this.sub$))
       .subscribe((response) => {
-        this.subscribers = response.data
-        console.log(this.subscribers)
-      })
+          this.subscribers = response.data
+          this.total = response.total;
+          this.page = response.page;
+          this.setQueryParams();
+        },
+        error => {
+        })
   }
+
+  pageChangeEvent(event: number) {
+    this.page = event;
+    this.getSubscribers();
+  }
+
+  setQueryParams() {
+    this.router
+      .navigate([], {
+        relativeTo: this.route,
+        queryParams: {
+          page: this.page,
+          pageSize: this.pageSize,
+        },
+        queryParamsHandling: 'merge',
+      })
+      .then();
+  }
+
   deleteItem(id: string) {
     this.subscribeService.deleteItem(id)
       .pipe()

@@ -1,28 +1,25 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {User, UserResponse} from "../interfaces/user";
+import {User} from "../interfaces/user";
 import {BaseService} from "./base.service";
 import {Subscribe, SubscribersResponse} from "../interfaces/subscribe";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SubscribeService extends BaseService{
+export class SubscribeService extends BaseService {
 
 
-  getSubscribers(data: any): Observable<SubscribersResponse<Subscribe[]>> {
-    return this.get<SubscribersResponse<Subscribe[]>>('subscription/all', { data });
+  getSubscribers(params = {}): Observable<SubscribersResponse> {
+    return this.get<SubscribersResponse>('subscription/all', params);
   }
 
-  deleteItem(id: string): Observable<User> {
-    return this.delete<User>(`subscription/${id}`);
+  deleteItem(id: string): Observable<Subscribe> {
+    return this.delete<Subscribe>(`subscription/${id}`);
   }
 
-  create (body: any): Observable<Subscribe> {
+  create(body: any): Observable<Subscribe> {
     return this.post<Subscribe>('subscription/subscribe', body)
   }
 
-  update(id: string, data: any): Observable<User> {
-    return this.put<User>(`subscription/${id}`, data);
-  }
 }
