@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { BlogsRoutingModule } from './blogs-routing.module';
-import { BlogsAddOrEditComponent } from './blogs-add-or-edit/blogs-add-or-edit.component';
+import {BlogsRoutingModule} from './blogs-routing.module';
+import {BlogsAddOrEditComponent} from './blogs-add-or-edit/blogs-add-or-edit.component';
 import {BlogsComponent} from "./blogs.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -12,10 +13,12 @@ import {ReactiveFormsModule} from "@angular/forms";
     BlogsComponent,
     BlogsAddOrEditComponent
   ],
-    imports: [
-        CommonModule,
-        BlogsRoutingModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    BlogsRoutingModule,
+    ReactiveFormsModule,
+    NgbPagination
+  ]
 })
-export class BlogsModule { }
+export class BlogsModule {
+}

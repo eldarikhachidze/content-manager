@@ -22,8 +22,8 @@ export class BlogsService extends BaseService {
     return this.get(`blog/get-blog/${id}`)
   }
 
-  getAllBlogs(): Observable<PaginatedResponse<Blog[]>> {
-    return this.get<PaginatedResponse<Blog[]>>('blog/get-all-blogs');
+  getAllBlogs(params = {}): Observable<PaginatedResponse> {
+    return this.get<PaginatedResponse>('blog/get-all-blogs', params);
   }
 
   deleteItem(id: string): Observable<Blog> {

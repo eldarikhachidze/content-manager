@@ -1,10 +1,10 @@
-
-export interface PaginatedResponse<T> {
+export interface PaginatedResponse {
   data: Blog[];
   total: number;
   limit: number;
   page: number;
 }
+
 export interface Blog {
   createdAt: string;
   updatedAt: string;
