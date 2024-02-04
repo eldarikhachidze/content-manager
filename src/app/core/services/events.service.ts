@@ -30,8 +30,8 @@ export class EventsService extends BaseService {
     return this.delete<Event>(`events/${id}`);
   }
 
-  getEventSubscribe(): Observable<EventSubscribeResponse> {
-    return this.get<EventSubscribeResponse>('events-subscription')
+  getEventSubscribe(params = {}): Observable<EventSubscribeResponse> {
+    return this.get<EventSubscribeResponse>('events-subscription', params)
   }
 
   deleteEventSubscribe(id: string): Observable<EventSubscribe> {
