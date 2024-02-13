@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PrognosesService} from "../../../core/services/prognoses.service";
 import {ZodiacService} from "../../../core/services/zodiac.service";
 import {Zodiaco} from "../../../core/interfaces/zodiac";
+import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-prognoses-add-or-edit',
@@ -21,7 +22,12 @@ export class PrognosesAddOrEditComponent {
     description: new FormControl('', Validators.required),
     zodiacoId: new FormControl('', Validators.required),
     categoryId: new FormControl('', Validators.required),
+    startDate: new FormControl('', Validators.required),
+    endDate: new FormControl('', Validators.required),
   })
+
+  startDateModal?: NgbDateStruct;
+  endDateModal?: NgbDateStruct;
 
   categories$: Observable<Category[]> = this.categoryService.getAllCategories()
   zodiac$: Observable<Zodiaco[]> = this.zodiacService.getAllZodiac()
@@ -52,12 +58,27 @@ export class PrognosesAddOrEditComponent {
     })
   }
 
+  formatDateToString(date: { year: number; month: number; day: number }): string {
+    const pad = (n: number) => (n < 10 ? `0${n}` : n);
+    return `${date.year}-${pad(date.month)}-${pad(date.day)}`;
+  }
+
   submit() {
     if (this.form.invalid) {
       return
     }
+
+    const startDateFormatted = this.formatDateToString(this.form.value.startDate);
+    const endDateFormatted = this.formatDateToString(this.form.value.endDate);
+
+    const formData = {
+      ...this.form.value,
+      startDate: startDateFormatted,
+      endDate: endDateFormatted
+    };
+
     if (this.form.value.id) {
-      this.prognosesService.update(this.form.value.id, this.form.value)
+      this.prognosesService.update(this.form.value.id, formData)
         .pipe()
         .subscribe(res => {
           this.router.navigate(['/prognoses'])
@@ -67,7 +88,7 @@ export class PrognosesAddOrEditComponent {
         })
     } else {
       console.log(this.form.value)
-      this.prognosesService.create(this.form.value)
+      this.prognosesService.create(formData)
         .pipe()
         .subscribe(res => {
           this.router.navigate(['/prognoses'])

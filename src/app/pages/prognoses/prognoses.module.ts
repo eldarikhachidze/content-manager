@@ -4,6 +4,7 @@ import { PrognosesRoutingModule } from './prognoses-routing.module';
 import { PrognosesComponent } from './prognoses.component';
 import { PrognosesAddOrEditComponent } from './prognoses-add-or-edit/prognoses-add-or-edit.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgbInputDatepicker} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -11,10 +12,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     PrognosesComponent,
     PrognosesAddOrEditComponent,
   ],
-  imports: [
-    CommonModule,
-    PrognosesRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        PrognosesRoutingModule,
+        ReactiveFormsModule,
+        NgbInputDatepicker
+    ]
 })
 export class PrognosesModule { }

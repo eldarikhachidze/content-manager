@@ -1,16 +1,19 @@
 import {Zodiaco} from "./zodiac";
+import {Category} from "./category";
 
 export interface Prognoses {
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: any;
   id: string;
   title: string;
   description: string;
-  zodiacoId: string;
-  categoryId: string;
-  category?: any;
+  zodiacoId: number;
+  categoryId: number;
+  category: Category;
   zodiaco: Zodiaco;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: any;
 }
 
 export interface PrognosesResponse<T> {
