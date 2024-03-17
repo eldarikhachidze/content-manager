@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PrognosesService} from "../../core/services/prognoses.service";
 import {Prognoses} from "../../core/interfaces/prognoses";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {Category} from "../../core/interfaces/category";
 import {CategoryService} from "../../core/services/category.service";

@@ -22,13 +22,48 @@
     <label>Location</label>
     <input class="login-input" formControlName="location">
   </div>
-  <div class="input-group input-group-lg">
-    <label>Start Date</label>
-    <input class="login-input" formControlName="startDate">
-  </div>
-  <div class="input-group input-group-lg">
-    <label>End Date</label>
-    <input class="login-input" formControlName="endDate">
+  <div class="input-group-lg date">
+    <div class="date-section">
+      <label >პროგნოზის დასაწყილსი</label>
+      <div class="date-picker">
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button">
+          <svg style="color: #ff7010;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+               class="bi bi-calendar" viewBox="0 0 16 16">
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+          </svg>
+        </button>
+        <input
+          class="input"
+          formControlName="startDate"
+          name="dp"
+          [(ngModel)]="startDateModal"
+          ngbDatepicker
+          #d="ngbDatepicker"
+        />
+      </div>
+    </div>
+    <div class="date-section">
+      <label>პროგნოზის დასასრული</label>
+      <div class="date-picker">
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dEnd.toggle()" type="button">
+          <svg style="color: #ff7010;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+               class="bi bi-calendar" viewBox="0 0 16 16">
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+          </svg>
+        </button>
+        <input
+          class="input"
+          formControlName="endDate"
+          name="dp"
+          [(ngModel)]="endDateModal"
+          ngbDatepicker
+          #dEnd="ngbDatepicker"
+        />
+      </div>
+    </div>
+
   </div>
   <div class="input-group input-group-lg">
     <label>Price</label>

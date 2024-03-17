@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EventsService} from "../../../core/services/events.service";
 import {of, Subject, switchMap, takeUntil} from "rxjs";
+import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-event-add-or-edit',
@@ -22,6 +23,9 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
     endDate: new FormControl('', Validators.required),
     price: new FormControl('', Validators.required)
   })
+
+  startDateModal?: NgbDateStruct;
+  endDateModal?: NgbDateStruct;
 
   selectedFile: any
   event$ = new Subject();
@@ -52,16 +56,29 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
     })
   }
 
+  formatDateToString(date: { year: number; month: number; day: number }): string {
+    const pad = (n: number) => (n < 10 ? `0${n}` : n);
+    return `${date.year}-${pad(date.month)}-${pad(date.day)}`;
+  }
+
 
   submit() {
 
+    const startDateFormatted = this.formatDateToString(this.form.value.startDate);
+    const endDateFormatted = this.formatDateToString(this.form.value.endDate);
+
+    const formData = {
+      ...this.form.value,
+      startDate: startDateFormatted,
+      endDate: endDateFormatted
+    };
     this.form.markAsTouched()
     if (this.form.invalid) {
       return
     }
 
     if (this.form.value.id) {
-      this.eventsService.update(this.form.value.id, this.form.value)
+      this.eventsService.update(this.form.value.id, formData)
         .pipe(takeUntil(this.event$))
         .subscribe(res => {
           this.router.navigate(['/events'])
@@ -70,16 +87,15 @@ export class EventAddOrEditComponent implements OnInit, OnDestroy {
             })
         })
     } else {
-      const fd = new FormData()
-      fd.append('files', this.selectedFile, this.selectedFile?.name)
-      fd.append('name', this.form.value.name)
-      fd.append('description', this.form.value.description)
-      fd.append('organizedBy', this.form.value.organizedBy)
-      fd.append('location', this.form.value.location)
-      fd.append('startDate', this.form.value.startDate)
-      fd.append('endDate', this.form.value.endDate)
-      fd.append('price', this.form.value.price)
-
+      const fd = new FormData();
+      fd.append('files', this.selectedFile, this.selectedFile?.name);
+      fd.append('name', formData.name);
+      fd.append('description', formData.description);
+      fd.append('organizedBy', formData.organizedBy);
+      fd.append('location', formData.location);
+      fd.append('startDate', formData.startDate);
+      fd.append('endDate', formData.endDate);
+      fd.append('price', formData.price);
       this.eventsService.create(fd).subscribe(res => {
         this.router.navigate(['/events'])
           .then(() => {
